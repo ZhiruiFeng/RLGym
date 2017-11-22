@@ -1,0 +1,2 @@
+# Ingore the compilied bytecode of Python source files
+*.pyc
