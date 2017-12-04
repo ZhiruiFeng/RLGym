@@ -29,8 +29,6 @@ class BoardEnv:
         self.end = None
         self.winner = None
 
-
-
     # Give an unique hash value to every states
     # There are pow(3, rows * cols) states in total
     def getHash(self):
