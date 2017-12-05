@@ -106,6 +106,64 @@ class BoardEnv:
             print(out)
         print '-------------'
 
+'''
+Judger works like a executor of the virtual environment and the its rules,
+enable the interaction between players and the world. 
+'''
+class Judger:
+    # @player1: the player who moves first
+    # @player2: another player
+    # @feedback: a boolean to decide whether to give palyer feedback at the end of each episode
+    def __init__(self, player1, player2, feedback=True):
+        self.p1 = player1
+        self.p2 = player2
+        self.feedback = feedback
+        self.currentPlayer = None
+        self.p1Symbol = 1
+        self.p2Symbol = -1
+        self.p1.setSymbol(self.p1Symbol)
+        self.p2.setSymbol(self.p2Symbol)
+        self.currentState = BoardEnv()
+
+    def giveReward(self):
+        if self.currentState.winner == self.p1Symbol:
+            self.p1.feedReward(1)
+            self.p2.feedReward(0)
+        elif self.currentState.winner == self.p2Symbol:
+            self.p1.feedReward(0)
+            self.p2.feedReward(1)
+        else:
+            self.p1.feedReward(0.1)
+            self.p2.feedReward(0.5)
+
+    def reset(self):
+        self.p1.reset()
+        self.p2.reset()
+        self.currentState = BoardEnv()
+        self.currentPlayer = None
+
+    # @show: Decide whether to print the board during the game
+    def play(self, show=False):
+        self.reset()
+        while True:
+            if self.currentPlayer == self.p1:
+                self.currentPlayer == self.p2
+            else:
+                self.currentPlayer == self.p1
+            if show:
+                self.currentState.boardPrint()
+        [i, j, symbol] = self.currentPlayer.takeAction()
+        self.currentState = self.currentState.moveToNext(i, j, symbol)
+        hashValue = self.currentState.getHash()
+        self.currentState, isEnd = self.allStates[hashValue]
+        self.feedCurrentState()
+        if isEnd:
+            if self.feedback:
+                self.giveReward()
+            return self.currentState.winner 
+
+
+
 theEnv = BoardEnv()
 theEnv.moveToNext(1,1,-1)
 theEnv.moveToNext(1,2,1)
