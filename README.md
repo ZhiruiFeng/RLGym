@@ -13,7 +13,7 @@ GitHub repositories:
 
 ## Goal
 
-With Jupyter Notebook, I reappear some experiments done in this book. This project is totally for self-learning purpose, and the code here are refer to the repositories I mentioned in reference. What I have done is rearrange the structure of the experiments code with my own understanding, which I think can help me gain deeper understanding.
+- Under 'learn' directory, through Jupyter Notebook, I reappear some experiments done in this book. This project is totally for self-learning purpose, and the code here are refer to the repositories I mentioned in reference. What I have done is rearrange the structure of the experiments code with my own understanding, which I think can help me gain deeper understanding.
 
 ## Environment
 - Python 3.6.4
@@ -21,3 +21,6 @@ With Jupyter Notebook, I reappear some experiments done in this book. This proje
 - OpenAI Gym 0.9.4
 
 ## Content
+- lib: the game environment
+- play: some test for fun
+- learn: exercises for learning
